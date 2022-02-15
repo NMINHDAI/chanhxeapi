@@ -1,6 +1,6 @@
 const express = require('express');
-const chanhxeRoute = require('../routes/chanhxe');
-const baixeRoute = require('../routes/baixe');
+const transportationRoute = require('../routes/transportation');
+const stationRoute = require('../routes/station');
 const error = require('../middleware/error');
 
 module.exports = function(app) {
@@ -8,7 +8,7 @@ module.exports = function(app) {
   app.use(express.urlencoded({extended:true}));
   
 
-  app.use('/api/chanhxe',chanhxeRoute);
-  app.use('/api/baixe', baixeRoute);
+  app.use('/api/transportation',transportationRoute);
+  app.use('/api/station', stationRoute);
   app.use(error);
 }
