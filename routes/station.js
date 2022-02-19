@@ -13,6 +13,7 @@ router.post("/", async (req, res) => {
   let station = new Station({
     stationName: req.body.stationName,
     address: req.body.address,
+    cityId: req.body.cityId,
     contactName: req.body.contactName,
     phone: req.body.phone,
     urlImage: req.body.urlImage,
@@ -54,8 +55,15 @@ router.get("/", (req, res) => {
 });
 
 //GET THE station BY ID
+router.get("/cityId/:cityId", async (req, res) => {
+  const station = await Station.findById(req.params.cityId);
+  if (!station) res.status(404).json({ err: "Station not found" });
+  res.send(station);
+});
+
+//GET THE station BY ID
 router.get("/:stationId", async (req, res) => {
-  const station = await Station.findById(req.params.stationId);
+  const station = await Station.find({cityId: req.params.cityId});
   if (!station) res.status(404).json({ err: "Station not found" });
   res.send(station);
 });
@@ -67,6 +75,8 @@ router.put("/:stationId", async (req, res) => {
     {
       stationName: req.body.stationName,
       address: req.body.address,
+      
+    cityId: req.body.cityId,
       contactName: req.body.contactName,
       phone: req.body.phone,
       urlImage: req.body.urlImage,

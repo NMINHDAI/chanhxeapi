@@ -14,6 +14,11 @@ const StationSchema = new mongoose.Schema({
         minlength:3,
         maxlength:200
     },
+    cityId:{
+      type:Int,
+      minlength:3,
+      maxlength:50
+    },
     contactName:{
       type:String,
       required:true,
