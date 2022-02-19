@@ -58,7 +58,6 @@ router.get("/", (req, res) => {
 router.get("/cityId/:cityId", async (req, res) => {
   
   const station = await Station.find({cityId: req.params.cityId});
-  const station = await Station.findById(req.params.cityId);
   if (!station) res.status(404).json({ err: "Station not found" });
   res.send(station);
 });
