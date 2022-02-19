@@ -56,6 +56,8 @@ router.get("/", (req, res) => {
 
 //GET THE station BY ID
 router.get("/cityId/:cityId", async (req, res) => {
+  
+  const station = await Station.find({cityId: req.params.cityId});
   const station = await Station.findById(req.params.cityId);
   if (!station) res.status(404).json({ err: "Station not found" });
   res.send(station);
@@ -63,7 +65,7 @@ router.get("/cityId/:cityId", async (req, res) => {
 
 //GET THE station BY ID
 router.get("/:stationId", async (req, res) => {
-  const station = await Station.find({cityId: req.params.cityId});
+  const station = await Station.findById(req.params.stationId);
   if (!station) res.status(404).json({ err: "Station not found" });
   res.send(station);
 });
