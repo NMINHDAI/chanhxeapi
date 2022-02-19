@@ -15,7 +15,7 @@ const StationSchema = new mongoose.Schema({
         maxlength:200
     },
     cityId:{
-      type:Int,
+      type:String,
       minlength:3,
       maxlength:50
     },
