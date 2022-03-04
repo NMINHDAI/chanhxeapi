@@ -1,6 +1,8 @@
 const express = require('express');
 const transportationRoute = require('../routes/transportation');
 const stationRoute = require('../routes/station');
+const userRoute = require('../routes/user');
+const authRoute = require('../routes/auth')
 const error = require('../middleware/error');
 
 module.exports = function(app) {
@@ -10,5 +12,7 @@ module.exports = function(app) {
 
   app.use('/api/transportation',transportationRoute);
   app.use('/api/station', stationRoute);
+  app.use('/api/user', userRoute);
+  app.use('/api/auth', authRoute);
   app.use(error);
 }

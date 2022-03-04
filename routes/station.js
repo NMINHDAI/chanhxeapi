@@ -1,14 +1,13 @@
+const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 const { validateStation, Station } = require("../models/station");
 const { validateTransportation, Transportation} = require("../models/transportation");
 
 //POST: CREATE A NEW station
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const error = await validateStation(req.body);
   if (error.message) res.status(400).json({ err: error.message });
-
-
 
   let station = new Station({
     stationName: req.body.stationName,
@@ -70,14 +69,14 @@ router.get("/:stationId", async (req, res) => {
 });
 
 //UPDATE station BASED ON ID
-router.put("/:stationId", async (req, res) => {
+router.put("/:stationId", auth, async (req, res) => {
   const updatedStation = await Station.findByIdAndUpdate(
     req.params.stationId,
     {
       stationName: req.body.stationName,
       address: req.body.address,
       
-    cityId: req.body.cityId,
+      cityId: req.body.cityId,
       contactName: req.body.contactName,
       phone: req.body.phone,
       urlImage: req.body.urlImage,
@@ -91,7 +90,7 @@ router.put("/:stationId", async (req, res) => {
 });
 
 //DELETE station BASED ON ID
-router.delete("/:stationId", async (req, res) => {
+router.delete("/:stationId", auth, async (req, res) => {
   const station = await Station.findByIdAndRemove(req.params.stationId);
   if (!station) res.status(404).json({ err: "Station not found" });
   else {

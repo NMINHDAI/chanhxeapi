@@ -1,9 +1,10 @@
+const auth = require('../middleware/auth');
 const express = require("express");
 const router = express.Router();
 const { validateTransportation, Transportation } = require("../models/transportation");
 const { validateStation, Station } = require("../models/station");
 //POST: CREATE A NEW Transprotation
-router.post("/", async (req, res) => {
+router.post("/", auth, async (req, res) => {
   const error = await validateTransportation(req.body);
   if (error.message) res.status(400).send(error.message);
 
