@@ -43,7 +43,7 @@ router.get("/:transportationId", async (req, res) => {
 });
 
 //UPDATE transportation BASED ON ID
-router.put("/:transportationId", async (req, res) => {
+router.put("/:transportationId", auth, async (req, res) => {
   const updatedTransportation = await Transportation.findByIdAndUpdate(
     req.params.transportationId,
     {
@@ -61,7 +61,7 @@ router.put("/:transportationId", async (req, res) => {
 });
 
 //DELETE transportation BASED ON ID
-router.delete("/:transportationId", async (req, res) => {
+router.delete("/:transportationId", auth, async (req, res) => {
   const transportation = await Transportation.findByIdAndRemove(req.params.transportationId);
   if (!transportation) res.status(404).json({ err: "Transportation not found" });
   else {
